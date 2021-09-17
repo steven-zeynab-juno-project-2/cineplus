@@ -1,0 +1,44 @@
+TMDB api - https://www.themoviedb.org/
+
+User input:
+genre (multiple)
+year
+
+
+- rating (min votes)
+
+photo flip
+
+// api-key
+// 589df13bf2644ed869e616fad6d941ce
+
+bare bones html then get the js working then we can prettify it with css
+
+-----
+
+// Create an app object (whatToWatch)
+
+// Initialize preset data in the dedicated properties
+// - apiURL
+// - apiKey
+// - movieGenre
+// - movieYear
+
+// Create a method (getGenres) to update the variable (movieGenre) for the movie genre(s) based on user input
+(array of genres)
+
+// Create a method (getYear) to update the variable (movieYear) for the movie release date based on user input
+
+// Create a method (getMovies) to make API calls, which takes the user inputs as parameter (year, genre)
+(where genre is an array)
+
+// When the API call is successful, display the result by appending the data to the results div
+
+// If the API call fails, display an error message
+
+// Create an init method to kick off the setup of the application
+
+// - add a 'click' event listener to call the api call method (getMovies)
+
+a second tab that you can choose a movie and a movie that you would like to get similar movies to
+
