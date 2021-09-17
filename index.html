@@ -1,11 +1,36 @@
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>What Movie to Watch</title>
 </head>
+
 <body>
-    
+    <h1>welcome</h1>
+    <script>
+        const testAPI = () => {
+
+            // &sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=1990-01-01&primary_release_date.lte=1999-12-31
+            fetch(`https://api.themoviedb.org/3/discover/movie?api_key=589df13bf2644ed869e616fad6d941ce&language=en-US&vote_average.gte=6&with_genres=28,35`)
+                .then(response => response.json())
+                .then((jsonData) => {
+                    console.log('test');
+                    console.log(jsonData);
+                });
+            // /genre/movie/list
+            fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=589df13bf2644ed869e616fad6d941ce`)
+                .then(response => response.json())
+                .then((jsonData) => {
+                    console.log('test');
+                    console.log(jsonData);
+                });
+
+        };
+        testAPI();
+    </script>
 </body>
+
 </html>
