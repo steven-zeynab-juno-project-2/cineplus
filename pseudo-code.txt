@@ -1,20 +1,10 @@
-TMDB api - https://www.themoviedb.org/
-
-User input:
-genre (multiple)
-year
-
-
-- rating (min votes)
-
-photo flip
+// TMDB api - https://www.themoviedb.org/
 
 // api-key
 // 589df13bf2644ed869e616fad6d941ce
 
-bare bones html then get the js working then we can prettify it with css
 
------
+----
 
 // Create an app object (whatToWatch)
 
@@ -39,6 +29,3 @@ bare bones html then get the js working then we can prettify it with css
 // Create an init method to kick off the setup of the application
 
 // - add a 'click' event listener to call the api call method (getMovies)
-
-a second tab that you can choose a movie and a movie that you would like to get similar movies to
-
