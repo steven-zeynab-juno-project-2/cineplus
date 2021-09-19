@@ -13,14 +13,15 @@
 const movieApp = {};
 
 
-movieApp.apiURL = `https://api.themoviedb.org/3/`;
+movieApp.apiURL = `https://api.themoviedb.org/3`;
+movieApp.imgURL = `https://image.tmdb.org/t/p/w500`;
 movieApp.apiKey = `589df13bf2644ed869e616fad6d941ce`;
 
 movieApp.searchButton = document.querySelector('.searchButton');
 
 movieApp.getGenres = () => {
 
-    const url = new URL(`${movieApp.apiURL}genre/movie/list`);
+    const url = new URL(`${movieApp.apiURL}/genre/movie/list`);
     url.search = new URLSearchParams({
         // pass in our API key as a parameter
         api_key: movieApp.apiKey
@@ -41,7 +42,7 @@ movieApp.getGenres = () => {
 }
 
 movieApp.getMovies = (genre) => {
-    const url = new URL(`${movieApp.apiURL}discover/movie`);
+    const url = new URL(`${movieApp.apiURL}/discover/movie`);
     url.search = new URLSearchParams({
         api_key: movieApp.apiKey,
         with_genres: genre
@@ -50,7 +51,8 @@ movieApp.getMovies = (genre) => {
     fetch(url)
         .then(response => response.json())
         .then((jsonData) => {
-            console.log(jsonData);
+            movieApp.displayMovies(jsonData.results);
+            
         });
 };
 
@@ -66,3 +68,18 @@ movieApp.init = () => {
 };
 
 movieApp.init();
+
+
+movieApp.displayMovies = (movies) => { 
+    const galleryList = document.querySelector('.galleryList');
+    movies.forEach((movie) => {
+        const title = movie.title;
+        const poster = movie.poster_path;
+        const liItem = document.createElement('li');
+        liItem.innerHTML = `
+        <p>${title}</p>
+        <img src='${movieApp.imgURL}${poster}'>`
+        galleryList.append(liItem);
+        
+    });
+}
