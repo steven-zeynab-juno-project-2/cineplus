@@ -1,0 +1,49 @@
+/* ===========================================
+GENERAL STYLINGS
+=========================================== */
+
+html {
+    font-size: 125%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style: none;
+    text-decoration: none;
+}
+
+.wrapper {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+}
+/* ===========================================
+HEADER
+=========================================== */
+
+/* ===========================================
+GALLERY
+=========================================== */
+
+.galleryList {
+    display: flex;
+    justify-content: space-between;
+    .galleryItem {
+        width: 30%;
+    }
+}
+
+

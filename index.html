@@ -10,20 +10,37 @@
 </head>
 
 <body>
-    <h1>CinePlus</h1>
-    
-    <label for="genres">Choose a genre</label>
+    <header>
+        <div class="wrapper">
+            <h1>CinePlus</h1>
+        </div>
+    </header>
+    <main>
+        <div class="wrapper">
 
-    <select name="genres" id="genres">
-        <!-- Add genres from TMDB API -->
-    </select> 
+            <section class="movieMenu">
+                <label for="genres">Choose a genre</label>
+                <select name="genres" id="genres">
+                    <!-- Add genres from TMDB API -->
+                </select> 
 
-    <button class='searchButton'>Search</button>
-
-    <ul class="galleryList">
-        <li></li>
-    </ul>
-
+                <button class='searchButton'>Search</button>
+            </section>
+        
+            <section class="movieGallery">
+                <ul class="galleryList">
+                    <!-- Adding from fetch API -->
+                    <!--<li>
+                            <div>
+                                <p>
+                                <img>
+                            </div>
+                        </li>
+                        -->
+                </ul>
+            </section>
+        </div>
+    </main>
     <script src="./script.js"></script>
 </body>
 
