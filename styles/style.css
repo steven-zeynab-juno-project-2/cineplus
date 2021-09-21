@@ -238,6 +238,12 @@ body {
   padding: 0;
 }
 
+.wrapper {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1200px;
+}
+
 img {
   display: block;
   width: 100%;
@@ -253,14 +259,25 @@ li {
   text-decoration: none;
 }
 
-.wrapper {
-  margin: 0 auto;
-  width: 90%;
-  max-width: 1200px;
+button {
+  border: none;
+  padding: 10px;
+}
+
+.chosen {
+  background-color: rgba(115, 235, 79, 0.5);
+}
+
+.hidden {
+  opacity: 0;
+  height: 0;
 }
 
 /* ===========================================
 HEADER
+=========================================== */
+/* ===========================================
+MENU
 =========================================== */
 /* ===========================================
 GALLERY
@@ -272,7 +289,13 @@ GALLERY
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
-.galleryList .galleryItem {
-  width: 30%;
+.galleryList li {
+  width: calc(100% / 3);
+  padding: 0;
+}
+.galleryList li img {
+  height: auto;
 }
