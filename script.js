@@ -64,7 +64,11 @@ movieApp.setGenres = (genres) => {
         genreButton.value = genre.id;
         genreButton.textContent = genre.name;
         genreButton.addEventListener('click', function () {
-            this.classList.toggle('chosen');
+            // if there are 4 or fewer, or if it is already chosen the user can toggle
+            if (document.querySelectorAll('.chosen').length < 4 || this.classList.contains('chosen')) {
+                this.classList.toggle('chosen');
+            } 
+
         });
 
         // appending the button to the li and then to the genre list

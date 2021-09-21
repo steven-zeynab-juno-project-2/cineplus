@@ -261,7 +261,11 @@ li {
 
 button {
   border: none;
+  border-radius: 10px;
   padding: 10px;
+  background-color: rgba(128, 186, 240, 0.5);
+  -webkit-box-shadow: inset 0px 0px 5px 2px #80baf0;
+          box-shadow: inset 0px 0px 5px 2px #80baf0;
 }
 
 .chosen {
@@ -280,6 +284,15 @@ HEADER
 /* ===========================================
 MENU
 =========================================== */
+.genreList {
+  margin: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
 /* ===========================================
 GALLERY
 =========================================== */
