@@ -100,7 +100,6 @@ movieApp.displayMovies = (movies) => {
         `
 
         galleryList.append(listItem);
-
     });
 }
 
