@@ -19,7 +19,8 @@ body {
 
 img {
     display: block;
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 ul {
@@ -44,7 +45,6 @@ button {
 .hidden {
     opacity: 0;
     height: 0;
-    visibility: hidden;
 }
     
 
@@ -61,20 +61,16 @@ MENU
 GALLERY
 =========================================== */
 
-.galleryList {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    // display: grid;
-    // grid-template-columns: 1fr 1fr 1fr;
-    // justify-content: space-between;
-    // align-items: center;
+.movieGallery {
+    ul{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
     li {
-        width: calc(100% / 3);
-        padding: 0;
-        img {
-            height: auto;
-        }
+        max-width: calc (30% - 20px);
     }
 }
 
