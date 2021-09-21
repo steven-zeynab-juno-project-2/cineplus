@@ -108,7 +108,6 @@ movieApp.displayMovies = (movies) => {
         </div>
         `
         galleryList.append(listItem);
-
     });
 }
 
