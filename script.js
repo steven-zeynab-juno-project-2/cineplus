@@ -128,21 +128,33 @@ movieApp.displayMovies = (movies) => {
 
         // if the poster is missing do not bother adding it to the gallery
         if (poster !== null) {
+            // Had to create individual elements so that we could add an event listener in the forEach
             const listItem = document.createElement('li');
+            const movieContainer = document.createElement('div');
+            const movieImage = document.createElement('img');
+            const summaryBox = document.createElement('div');
+            const summary = document.createElement('p');
+            const movieTitle = document.createElement('p');
 
             listItem.classList.add('galleryItem');
 
-            listItem.innerHTML = `
-            <div class="movie">
-                <img src='${movieApp.imgURL}${poster}'>
-                <p class="summaryCard"></p>
-            </div>
-            <p>${title}</p>`;
-            galleryList.append(listItem);
+            movieContainer.classList.add('movie');
+            
+            movieImage.src = `${movieApp.imgURL}${poster}`;
+            movieImage.alt = `${title}`;
 
+            summaryBox.classList.add('summary');
+
+            summary.innerText = `${overview}`;
+
+            movieTitle.innerText = `${title}`;
+            
+            summaryBox.append(summary);
+            movieContainer.append(movieImage, summaryBox);
+            listItem.append(movieContainer, movieTitle);
+            galleryList.append(listItem);
         }
     });
-
 }
 
 movieApp.init();
