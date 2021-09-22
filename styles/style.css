@@ -236,6 +236,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  background-color: rgba(172, 202, 214, 0.39);
 }
 
 .wrapper {
@@ -326,6 +327,11 @@ MENU
 /* ===========================================
 GALLERY
 =========================================== */
+.movieGallery {
+  -webkit-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+  opacity: 0;
+}
 .movieGallery ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -342,7 +348,17 @@ GALLERY
 .movieGallery li {
   max-width: calc(30% - 20px);
 }
+.movieGallery li img {
+  -webkit-box-shadow: 0px 0px 3px 5px #000000;
+          box-shadow: 0px 0px 3px 5px #000000;
+}
 
-* {
-  border: 1px solid red;
+.summaryCard {
+  -webkit-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+  opacity: 0;
+}
+
+.unhidden {
+  opacity: 1;
 }
