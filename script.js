@@ -70,10 +70,12 @@ movieApp.setGenres = (genres) => {
         genreButton.value = genre.id;
         genreButton.textContent = genre.name;
         genreButton.addEventListener('click', function () {
+
             // if there are 3 or fewer, or if it is already chosen the user can toggle
             if (document.querySelectorAll('.chosen').length < 3 || this.classList.contains('chosen')) {
                 this.classList.toggle('chosen');
             }
+
         });
 
         // appending the button to the li and then to the genre list
@@ -116,7 +118,6 @@ movieApp.displayMovies = (movies) => {
         </div>
         `
         galleryList.append(listItem);
-
     });
 }
 
