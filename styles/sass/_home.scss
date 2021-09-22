@@ -35,18 +35,16 @@ li {
 
 button {
     border: none;
+    border-radius: 10px;
     padding: 10px;
+    background-color: rgba(128, 186, 240, 0.5);
+    box-shadow: inset 0px 0px 5px 2px rgba(128, 186, 240, 1);
 }
 
 .chosen {
     background-color: rgba(115, 235, 79, 0.5);
 }
 
-.hidden {
-    opacity: 0;
-    height: 0;
-}
-    
 
 /* ===========================================
 HEADER
@@ -56,6 +54,29 @@ HEADER
 MENU
 =========================================== */
 
+
+.movieMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .genreBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+.genreList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    max-height: 0;
+    li {
+        margin: 5px;
+    }
+}
 
 /* ===========================================
 GALLERY
@@ -70,16 +91,10 @@ GALLERY
     }
 
     li {
-        max-width: calc (30% - 20px);
+        max-width: calc(30% - 20px);
     }
 }
 
-// * {
-//     border: 1px solid red;
-// }
-
-
-
-
-        
-
+* {
+    border: 1px solid red;
+}

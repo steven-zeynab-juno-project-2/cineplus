@@ -262,16 +262,15 @@ li {
 
 button {
   border: none;
+  border-radius: 10px;
   padding: 10px;
+  background-color: rgba(128, 186, 240, 0.5);
+  -webkit-box-shadow: inset 0px 0px 5px 2px #80baf0;
+          box-shadow: inset 0px 0px 5px 2px #80baf0;
 }
 
 .chosen {
   background-color: rgba(115, 235, 79, 0.5);
-}
-
-.hidden {
-  opacity: 0;
-  height: 0;
 }
 
 /* ===========================================
@@ -280,6 +279,50 @@ HEADER
 /* ===========================================
 MENU
 =========================================== */
+.movieMenu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.movieMenu .genreBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.genreList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 20px 0;
+  overflow: hidden;
+  -webkit-transition: max-height 0.3s ease-out;
+  transition: max-height 0.3s ease-out;
+  max-height: 0;
+}
+.genreList li {
+  margin: 5px;
+}
+
 /* ===========================================
 GALLERY
 =========================================== */
@@ -297,5 +340,9 @@ GALLERY
           align-items: baseline;
 }
 .movieGallery li {
-  max-width: 33%;
+  max-width: calc(30% - 20px);
+}
+
+* {
+  border: 1px solid red;
 }
