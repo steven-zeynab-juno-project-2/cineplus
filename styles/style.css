@@ -236,6 +236,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  background-color: rgba(172, 202, 214, 0.39);
 }
 
 .wrapper {
@@ -326,23 +327,51 @@ MENU
 /* ===========================================
 GALLERY
 =========================================== */
+.movieGallery {
+  -webkit-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+  opacity: 0;
+}
+.movieGallery .movie {
+  position: relative;
+}
+.movieGallery .movie:hover {
+  cursor: pointer;
+}
+.movieGallery .summary {
+  -webkit-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+.movieGallery .summary:hover {
+  opacity: 1;
+}
 .movieGallery ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-align: baseline;
       -ms-flex-align: baseline;
           align-items: baseline;
+  padding-top: 5%;
 }
 .movieGallery li {
   max-width: calc(30% - 20px);
 }
+.movieGallery li img {
+  -webkit-box-shadow: 0px 0px 3px 5px #000000;
+          box-shadow: 0px 0px 3px 5px #000000;
+}
 
-* {
-  border: 1px solid red;
+.unhidden {
+  opacity: 1;
 }

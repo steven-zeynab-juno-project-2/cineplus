@@ -7,6 +7,7 @@ movieApp.imgURL = `https://image.tmdb.org/t/p/w500`;
 movieApp.apiKey = `589df13bf2644ed869e616fad6d941ce`;
 
 movieApp.genreList = document.querySelector('.genreList');
+movieApp.pageNum = 1; // new
 
 movieApp.init = () => {
     movieApp.getGenres();
@@ -18,13 +19,18 @@ movieApp.setupEventListeners = () => {
     const searchButton = document.querySelector('.searchButton');
     const show = document.querySelector('.show');
 
+    // Adding event listener to the search Button
     searchButton.addEventListener('click', () => {
         const selectedGenres = [...document.querySelectorAll('.chosen')];
         // converting nodelist to array so that we can use map
-        const genreValues = selectedGenres.map((genre)=>{
+        const genreValues = selectedGenres.map((genre) => {
             return genre.value;
         });
-        movieApp.getMovies(genreValues);
+
+        // new
+        movieApp.pageNum = 1;
+        movieApp.getMovies(genreValues, movieApp.pageNum);
+        // will add another listener for a show more where you can get subsequent pages of movies
     });
 
     // Adding event listener to the show Button
@@ -48,13 +54,14 @@ movieApp.getGenres = () => {
     url.search = new URLSearchParams({
         // pass in our API key as a parameter
         api_key: movieApp.apiKey
+
     })
 
     fetch(url)
         .then(response => response.json())
         .then((jsonData) => {
             movieApp.setGenres(jsonData.genres);
-        });   
+        });
 };
 
 // Adding the genres to the page in the form of buttons
@@ -85,11 +92,13 @@ movieApp.setGenres = (genres) => {
 };
 
 // Get the movies based on the user inputted query parameters, genre, release date, etc.
-movieApp.getMovies = (genre) => {
+movieApp.getMovies = (genre, page) => {
     const url = new URL(`${movieApp.apiURL}/discover/movie`);
     url.search = new URLSearchParams({
         api_key: movieApp.apiKey,
-        with_genres: genre
+        with_genres: genre,
+        page: page //new
+
     });
 
     fetch(url)
@@ -101,27 +110,51 @@ movieApp.getMovies = (genre) => {
 
 movieApp.displayMovies = (movies) => {
     const galleryList = document.querySelector('.galleryList');
+    const movieGallery = document.querySelector('.movieGallery');
+
+    if (galleryList.querySelector('li')) {
+
+    } else {
+        movieGallery.classList.toggle('unhidden');
+    }
 
     galleryList.innerHTML = '';
 
     movies.forEach((movie) => {
+        //new
         const title = movie.title;
         const poster = movie.poster_path;
-        const listItem = document.createElement('li');
+        const overview = movie.overview;
 
-        listItem.classList.add('galleryItem');
+        // if the poster is missing do not bother adding it to the gallery
+        if (poster !== null) {
+            // Had to create individual elements so that we could add an event listener in the forEach
+            const listItem = document.createElement('li');
+            const movieContainer = document.createElement('div');
+            const movieImage = document.createElement('img');
+            const summaryBox = document.createElement('div');
+            const summary = document.createElement('p');
+            const movieTitle = document.createElement('p');
 
-        listItem.innerHTML = `
-        <div class="movie">
-            <img src='${movieApp.imgURL}${poster}'>
-            <p>${title}</p>
-        </div>
-        `
-        galleryList.append(listItem);
+            listItem.classList.add('galleryItem');
+
+            movieContainer.classList.add('movie');
+            
+            movieImage.src = `${movieApp.imgURL}${poster}`;
+            movieImage.alt = `${title}`;
+
+            summaryBox.classList.add('summary');
+
+            summary.innerText = `${overview}`;
+
+            movieTitle.innerText = `${title}`;
+            
+            summaryBox.append(summary);
+            movieContainer.append(movieImage, summaryBox);
+            listItem.append(movieContainer, movieTitle);
+            galleryList.append(listItem);
+        }
     });
 }
 
 movieApp.init();
-
-
-
