@@ -13,11 +13,11 @@ movieApp.init = () => {
     movieApp.setupEventListeners();
 };
 
-// setting up the search and hide event listeners
+// setting up the search and show event listeners
 movieApp.setupEventListeners = () => {
     const searchButton = document.querySelector('.searchButton');
-    const hide = document.querySelector('.hide');
-    
+    const show = document.querySelector('.show');
+
     searchButton.addEventListener('click', () => {
         const selectedGenres = [...document.querySelectorAll('.chosen')];
         // converting nodelist to array so that we can use map
@@ -27,10 +27,16 @@ movieApp.setupEventListeners = () => {
         movieApp.getMovies(genreValues);
     });
 
-    // Adding event listener to 
-    hide.addEventListener('click', function () {
+    // Adding event listener to the show Button
+    show.addEventListener('click', function () {
         const genreList = document.querySelector('.genreList');
-        genreList.classList.toggle('hidden');
+        // transitions on percentage or auto values is not supported in js so we have to do it this way :sad-face:
+
+        if (genreList.style.maxHeight) {
+            genreList.style.maxHeight = null;
+        } else {
+            genreList.style.maxHeight = `${genreList.scrollHeight}px`;
+        }
     });
 
 };
@@ -64,10 +70,11 @@ movieApp.setGenres = (genres) => {
         genreButton.value = genre.id;
         genreButton.textContent = genre.name;
         genreButton.addEventListener('click', function () {
-            // if there are 4 or fewer, or if it is already chosen the user can toggle
-            if (document.querySelectorAll('.chosen').length < 4 || this.classList.contains('chosen')) {
+
+            // if there are 3 or fewer, or if it is already chosen the user can toggle
+            if (document.querySelectorAll('.chosen').length < 3 || this.classList.contains('chosen')) {
                 this.classList.toggle('chosen');
-            } 
+            }
 
         });
 
@@ -94,6 +101,9 @@ movieApp.getMovies = (genre) => {
 
 movieApp.displayMovies = (movies) => {
     const galleryList = document.querySelector('.galleryList');
+
+    galleryList.innerHTML = '';
+
     movies.forEach((movie) => {
         const title = movie.title;
         const poster = movie.poster_path;

@@ -46,14 +46,6 @@ button {
 }
 
 
-
-.hidden {
-    opacity: 0;
-    height: 0;
-    visibility: hidden;
-}
-    
-
 /* ===========================================
 HEADER
 =========================================== */
@@ -61,11 +53,30 @@ HEADER
 /* ===========================================
 MENU
 =========================================== */
+
+
+.movieMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .genreBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
 .genreList {
-    margin: 20px;
     display: flex;
     flex-wrap: wrap;
-}
+    justify-content: center;
+    margin: 20px 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    max-height: 0;
+    li {
+        margin: 5px;
+    }
+
 
 /* ===========================================
 GALLERY
@@ -80,16 +91,10 @@ GALLERY
     }
 
     li {
-        max-width: calc (30% - 20px);
+        max-width: calc(30% - 20px);
     }
 }
 
-// * {
-//     border: 1px solid red;
-// }
-
-
-
-
-        
-
+* {
+    border: 1px solid red;
+}
