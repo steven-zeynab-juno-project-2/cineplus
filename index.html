@@ -17,21 +17,38 @@
     </header>
     <main>
         <div class="wrapper">
-                
+
             <section class="movieMenu">
 
                 <div class="genreBox">
                     <h2>Select a Genre</h2>
-                    <button class='show'>Show</button>
+                    
                     <ul class="genreList">
                         <!-- Add genres from API -->
-
                     </ul>
                 </div>
-
-                <button class='searchButton'>Search</button>
+                <div class="searchBox">
+                    <div class="yearBox">
+                        <h2>Release Date</h2>
+                        <button class='show'>Show</button>
+                        <ul class="yearList">
+                            <li class="yearItem" value=1949>Before 1950</li>
+                            <li class="yearItem" value=1950>1950s</li>
+                            <li class="yearItem" value=1960>1960s</li>
+                            <li class="yearItem" value=1970>1970s</li>
+                            <li class="yearItem" value=1980>1980s</li>
+                            <li class="yearItem" value=1990>1990s</li>
+                            <li class="yearItem" value=2000>2000s</li>
+                            <li class="yearItem" value=2010>2010s</li>
+                            <li class="yearItem" value=2020>2020s</li>
+                        </ul>
+                    </div>
+                    <div class="searchButtonBox">
+                        <button class='searchButton'>Search</button>
+                    </div>
+                </div>
             </section>
-        
+
             <section class="movieGallery">
                 <ul class="galleryList">
                     <!-- Adding from fetch API -->

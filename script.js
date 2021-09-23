@@ -9,6 +9,9 @@ movieApp.apiKey = `589df13bf2644ed869e616fad6d941ce`;
 movieApp.genreList = document.querySelector('.genreList');
 movieApp.pageNum = 1; // new
 
+movieApp.rangeStart = 0;
+movieApp.rangeEnd = 0;
+
 movieApp.init = () => {
     movieApp.getGenres();
     movieApp.setupEventListeners();
@@ -18,10 +21,11 @@ movieApp.init = () => {
 movieApp.setupEventListeners = () => {
     const searchButton = document.querySelector('.searchButton');
     const show = document.querySelector('.show');
-
+    const yearList = document.querySelectorAll('.yearItem');
+    
     // Adding event listener to the search Button
     searchButton.addEventListener('click', () => {
-        const selectedGenres = [...document.querySelectorAll('.chosen')];
+        const selectedGenres = [...document.querySelectorAll('.genre.chosen')];
         // converting nodelist to array so that we can use map
         const genreValues = selectedGenres.map((genre) => {
             return genre.value;
@@ -33,17 +37,41 @@ movieApp.setupEventListeners = () => {
         // will add another listener for a show more where you can get subsequent pages of movies
     });
 
+    // Adding event listeners to the yearList dropdown
+    yearList.forEach((rangeValue)=>{
+        rangeValue.addEventListener('click', function () {
+
+            if (document.querySelectorAll('.yearList.chosen').length === 0  || (this.classList.contains('chosen') && this.classList.contains('yearList'))) {
+                movieApp.setChosen(this);
+            }
+
+            // On the bottom range we set 
+            if (this.value !== 1949) {
+                movieApp.rangeStart = `${this.value}-01-01`;
+                movieApp.rangeEnd = `${this.value + 9}-12-31`;
+            } else {
+                movieApp.rangeStart = `1900-01-01`;
+                movieApp.rangeEnd = `${this.value}-12-31`;
+            }
+
+            console.log(movieApp.rangeStart, movieApp.rangeEnd);
+        }) 
+    });
+
+    
     // Adding event listener to the show Button
     show.addEventListener('click', function () {
-        const genreList = document.querySelector('.genreList');
+        const yearList = document.querySelector('.yearList');
         // transitions on percentage or auto values is not supported in js so we have to do it this way :sad-face:
 
-        if (genreList.style.maxHeight) {
-            genreList.style.maxHeight = null;
+        if (yearList.style.maxHeight) {
+            yearList.style.maxHeight = null;
         } else {
-            genreList.style.maxHeight = `${genreList.scrollHeight}px`;
+            yearList.style.maxHeight = `${yearList.scrollHeight}px`;
         }
     });
+
+
 
 };
 
@@ -79,8 +107,8 @@ movieApp.setGenres = (genres) => {
         genreButton.addEventListener('click', function () {
 
             // if there are 3 or fewer, or if it is already chosen the user can toggle
-            if (document.querySelectorAll('.chosen').length < 3 || this.classList.contains('chosen')) {
-                this.classList.toggle('chosen');
+            if (document.querySelectorAll('.genre.chosen').length < 3 || (this.classList.contains('chosen') && this.classList.contains('genre'))) {
+                movieApp.setChosen(this);
             }
 
         });
@@ -91,14 +119,21 @@ movieApp.setGenres = (genres) => {
     });
 };
 
+// 
+movieApp.setChosen = (element) => {
+    element.classList.toggle('chosen');
+}
+
 // Get the movies based on the user inputted query parameters, genre, release date, etc.
 movieApp.getMovies = (genre, page) => {
     const url = new URL(`${movieApp.apiURL}/discover/movie`);
     url.search = new URLSearchParams({
         api_key: movieApp.apiKey,
         with_genres: genre,
-        page: page //new
-
+        page: page, //new
+        'primary_release_date.gte': movieApp.rangeStart,
+        'primary_release_date.lte': movieApp.rangeEnd
+        // primary_release_date.gte=1990-01-01&primary_release_date.lte=1999-12-31
     });
 
     fetch(url)
