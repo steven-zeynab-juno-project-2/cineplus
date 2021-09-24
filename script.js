@@ -28,6 +28,8 @@ movieApp.setupEventListeners = () => {
         const selectedGenres = [...document.querySelectorAll('.genre.chosen')];
         // converting nodelist to array so that we can use map
         const genreValues = selectedGenres.map((genre) => {
+            console.log(genre.value);
+            
             return genre.value;
         });
 
@@ -38,24 +40,24 @@ movieApp.setupEventListeners = () => {
     });
 
     // Adding event listeners to the yearList dropdown
-    yearList.forEach((rangeValue)=>{
+    yearList.forEach((rangeValue) => {
         rangeValue.addEventListener('click', function () {
 
-            if (document.querySelectorAll('.yearList.chosen').length === 0  || (this.classList.contains('chosen') && this.classList.contains('yearList'))) {
+            if (document.querySelectorAll('.yearList.chosen').length === 0 || (this.classList.contains('chosen') && this.classList.contains('yearList'))) {
                 movieApp.setChosen(this);
             }
 
             // On the bottom range we set 
             if (this.value !== 1949) {
-                movieApp.rangeStart = `${this.value}-01-01`;
-                movieApp.rangeEnd = `${this.value + 9}-12-31`;
+                movieApp.rangeStart = `${parseInt(this.value)}-01-01`;
+                movieApp.rangeEnd = `${parseInt(this.value) + 9}-12-31`;
             } else {
                 movieApp.rangeStart = `1900-01-01`;
-                movieApp.rangeEnd = `${this.value}-12-31`;
+                movieApp.rangeEnd = `${parseInt(this.value)}-12-31`;
             }
 
             console.log(movieApp.rangeStart, movieApp.rangeEnd);
-        }) 
+        })
     });
 
     
