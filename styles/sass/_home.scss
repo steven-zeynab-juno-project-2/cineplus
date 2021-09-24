@@ -9,12 +9,7 @@ html {
 body {
     margin: 0;
     padding: 0;
-    background-color: rgba(249, 211, 211, 76%);
-}
-
-h1 {
-    margin: 0;
-    padding: 0;
+    background-color: rgba(172, 202, 214, 0.39);
 }
 
 .wrapper {
@@ -41,42 +36,15 @@ li {
 
 button {
     border: none;
-    outline: 1px solid rgba(0 ,0, 0, 0.3);
     border-radius: 10px;
     padding: 10px;
-    background-color: rgb(235 158 108 / 27%);
-    box-shadow: inset 0px 0px 5px 2px rgb(231 125 47 / 78%);
-}
-
-.yearItem {
-    padding: 10px;
-    outline: 1px solid rgba(0 ,0, 0, 0.3);
-    background-color: rgb(235 158 108 / 27%);
-    box-shadow: inset 0px 0px 5px 2px rgb(231 125 47 / 78%);
-    border-radius: 10px;
-    text-align: center;
-}
-
-.yearBox {
-    width: 30%;
-    margin: 3%;
-    text-align: center;
-}
-
-.yearList {
-    border-radius: 10px;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-    max-height: 0;
+    background-color: rgba(128, 186, 240, 0.5);
+    box-shadow: inset 0px 0px 5px 2px rgba(128, 186, 240, 1);
 }
 
 .chosen {
-    // background: linear-gradient(141deg, rgba(131,58,180,0.5) 0%, rgba(253,29,29,0.5) 50%, rgba(252,176,69,0.5) 100%);
-    background: rgba(253, 29, 29, 0.5);
-    color: white;
-    box-shadow: inset 0px 0px 5px 2px #ef5858;
+    background-color: rgba(115, 235, 79, 0.5);
 }
-
 
 
 /* ===========================================
@@ -103,17 +71,12 @@ MENU
     flex-wrap: wrap;
     justify-content: center;
     margin: 20px 0;
-
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    max-height: 0;
     li {
         margin: 5px;
     }
-}
-
-.searchBox {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 80%;
 }
 
 /* ===========================================
@@ -131,8 +94,6 @@ GALLERY
     }
     
     .summary {
-        display: flex;
-        align-items: center;
         transition: opacity 0.3s ease-out;
         opacity: 0;
         background-color: rgba($color: #000000, $alpha: 0.7);
@@ -144,10 +105,6 @@ GALLERY
             opacity: 1;
         }
 
-        p {
-            color: rgb(255, 255, 255, 0.7);
-            padding: 10%;
-        }
 
     }
 
@@ -169,8 +126,4 @@ GALLERY
 
 .unhidden {
     opacity: 1;
-}
-
-* {
-    outline: 1px solid red;
 }
