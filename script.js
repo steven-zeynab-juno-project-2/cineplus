@@ -7,6 +7,8 @@ movieApp.imgURL = `https://image.tmdb.org/t/p/w500`;
 movieApp.apiKey = `589df13bf2644ed869e616fad6d941ce`;
 
 movieApp.genreList = document.querySelector('.genreList');
+movieApp.galleryList = document.querySelector('.galleryList');
+
 movieApp.pageNum = 1; // new
 
 movieApp.rangeStart = 0;
@@ -132,6 +134,7 @@ movieApp.getMovies = (genre, page) => {
     url.search = new URLSearchParams({
         api_key: movieApp.apiKey,
         with_genres: genre,
+        include_adult: false,
         page: page, //new
         'primary_release_date.gte': movieApp.rangeStart,
         'primary_release_date.lte': movieApp.rangeEnd
@@ -145,51 +148,48 @@ movieApp.getMovies = (genre, page) => {
         });
 };
 
+movieApp.clearMovies = () => {
+    movieApp.galleryList.innerHTML = '';
+};
 movieApp.displayMovies = (movies) => {
-    const galleryList = document.querySelector('.galleryList');
+    
     const movieGallery = document.querySelector('.movieGallery');
 
-    if (galleryList.querySelector('li')) {
+    // If no list items exist, unhide the movie gallery
+    movieApp.galleryList.querySelector('li') ? null : movieGallery.classList.toggle('unhidden');
 
-    } else {
-        movieGallery.classList.toggle('unhidden');
-    }
-
-    galleryList.innerHTML = '';
+    movieApp.clearMovies();
 
     movies.forEach((movie) => {
         //new
-        const title = movie.title;
-        const poster = movie.poster_path;
-        const overview = movie.overview;
+        const {title, poster_path: poster, overview, vote_average: rating } = movie;
+        // const poster = movie.poster_path;
+        // const overview = movie.overview;
+        // const rating = movie.vote_average;
 
         // if the poster is missing do not bother adding it to the gallery
         if (poster !== null) {
-            // Had to create individual elements so that we could add an event listener in the forEach
+
             const listItem = document.createElement('li');
-            const movieContainer = document.createElement('div');
-            const movieImage = document.createElement('img');
-            const summaryBox = document.createElement('div');
-            const summary = document.createElement('p');
-            const movieTitle = document.createElement('p');
 
             listItem.classList.add('galleryItem');
+            listItem.innerHTML = `
+                <div class="movie">
+                    <img src="${movieApp.imgURL}${poster}" alt="${title}">
+                    <div class="summary">
+                        <p class="overview">${overview}</p>
+                        <div class="ratingContainer">
+                            <p class="rating">${rating}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="titleContainer">
+                    <p class="title">${title}</p>  
+                </div>
+            `;
 
-            movieContainer.classList.add('movie');
-            
-            movieImage.src = `${movieApp.imgURL}${poster}`;
-            movieImage.alt = `${title}`;
+            movieApp.galleryList.append(listItem);
 
-            summaryBox.classList.add('summary');
-
-            summary.innerText = `${overview}`;
-
-            movieTitle.innerText = `${title}`;
-            
-            summaryBox.append(summary);
-            movieContainer.append(movieImage, summaryBox);
-            listItem.append(movieContainer, movieTitle);
-            galleryList.append(listItem);
         }
     });
 }

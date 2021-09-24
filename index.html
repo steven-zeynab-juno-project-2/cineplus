@@ -15,62 +15,61 @@
 </head>
 
 <body>
-    <header>
-        <div class="wrapper">
-            <h1>CinePlus</h1>
-        </div>
-    </header>
-    <main>
-        <div class="wrapper">
-
-            <section class="movieMenu">
-
-                <div class="genreBox">
-                    <h2>Select a Genre</h2>
-                    
-                    <ul class="genreList">
-                        <!-- Add genres from API -->
-                    </ul>
-                </div>
-                <div class="searchBox">
-                    <div class="yearBox">
-                        <h2>Release Date</h2>
-                        <button class='show'>Show</button>
-                        <ul class="yearList">
-                            <li><button class="yearItem" value=1949>Before 1950</button></li>
-                            <li><button class="yearItem" value=1950>1950s</button></li>
-                            <li><button class="yearItem" value=1960>1960s</button></li>
-                            <li><button class="yearItem" value=1970>1970s</button></li>
-                            <li><button class="yearItem" value=1980>1980s</button></li>
-                            <li><button class="yearItem" value=1990>1990s</button></li>
-                            <li><button class="yearItem" value=2000>2000s</button></li>
-                            <li><button class="yearItem" value=2010>2010s</button></li>
-                            <li><button class="yearItem" value=2020>2020s</button></li>
+    <div class="appContainer">
+        <header>
+            <div class="wrapper">
+                <h1>CinePlus</h1>
+            </div>
+        </header> <!-- end of header -->
+        <main>
+            <div class="wrapper">
+    
+                <section class="movieMenu">
+    
+                    <div class="genreBox">
+                        <h3>Select Genre</h3>
+                        
+                        <ul class="genreList">
+                            <!-- Add genres from API -->
                         </ul>
                     </div>
-                    <div class="searchButtonBox">
-                        <button class='searchButton'>Search</button>
+                    <div class="searchBox">
+                        <div class="yearBox">
+                            <h3>Release Date</h3>
+                            <button class='show'>Show</button>
+                            <ul class="yearList">
+                                <li><button class="yearItem" value=1949>Before 1950</button></li>
+                                <li><button class="yearItem" value=1950>1950s</button></li>
+                                <li><button class="yearItem" value=1960>1960s</button></li>
+                                <li><button class="yearItem" value=1970>1970s</button></li>
+                                <li><button class="yearItem" value=1980>1980s</button></li>
+                                <li><button class="yearItem" value=1990>1990s</button></li>
+                                <li><button class="yearItem" value=2000>2000s</button></li>
+                                <li><button class="yearItem" value=2010>2010s</button></li>
+                                <li><button class="yearItem" value=2020>2020s</button></li>
+                            </ul>
+                        </div>
+                        <div class="searchButtonBox">
+                            <button class='searchButton'>Search</button>
+                        </div>
                     </div>
-                </div>
-            </section>
-
-            <section class="movieGallery">
-                <ul class="galleryList">
-                    <!-- Adding from fetch API -->
-                </ul>
-            </section>
-        </div>
-    </main>
-    <footer>
-        <div class="footerContainer">
-            <div>
-                <p>Created by <a href="https://github.com/ZeynabManafova" target="_blank">Zeynab Manafova</a> and <a href="https://github.com/scwchen" target="_blank">Steven Chen at</a> <a href="https://junocollege.com/" target="_blank">Juno College</a> 2021</p>
+                </section>
+    
+                <section class="movieGallery">
+                    <ul class="galleryList">
+                        <!-- Adding from fetch API -->
+                    </ul>
+                </section>
             </div>
-            <div>
+        </main> <!-- end of main -->
+        <footer>
+            <div class="footerContainer">
+                <p>Created by <a href="https://github.com/ZeynabManafova" target="_blank">Zeynab Manafova</a> and <a href="https://github.com/scwchen" target="_blank">Steven Chen at</a> <a href="https://junocollege.com/" target="_blank">Juno College</a> 2021</p>
                 <p>Powered by <a href="https://developers.themoviedb.org/3/" target="_blank">TMDB API</a></p>        
             </div>
-        </div>
-    </footer>
+        </footer> <!-- end of footer -->
+    </div> <!-- end of appContainer -->
+    
     <script src="./script.js"></script>
 </body>
 
