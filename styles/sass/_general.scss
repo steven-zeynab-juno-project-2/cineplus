@@ -61,19 +61,18 @@ p {
     margin: 0;
 }
 
-
 button {
     cursor: pointer;
     border: none;
     outline: 1px solid rgba(0 ,0, 0, 0.3);
     border-radius: 10px;
     padding: 10px;
-    background-color: rgb(235 158 108 / 27%);
-    box-shadow: inset 0px 0px 5px 2px rgb(231 125 47 / 78%);
+    background-color: $box-color;
+    box-shadow: inset 0px 0px 5px 2px $box-shadow-color;
 }
 
 .chosen {
-    background-color: rgba(253, 29, 29, 0.5);
+    background-color: #f07a75;
     box-shadow: inset 0px 0px 5px 2px #ef5858;
     color: whitesmoke;
 }

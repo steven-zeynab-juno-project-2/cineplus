@@ -11,27 +11,54 @@ movieApp.galleryList = document.querySelector('.galleryList');
 
 movieApp.pageNum = 1; // new
 
+movieApp.rating = 6;
+movieApp.maxRuntime = 180;
+
 movieApp.rangeStart = 0;
 movieApp.rangeEnd = 0;
 
 movieApp.init = () => {
     movieApp.getGenres();
     movieApp.setupEventListeners();
+
+    document.querySelector('.yearOpen').addEventListener('click', function () {
+        document.querySelector('.yearOptions').classList.toggle('open');
+    });
 };
+
 
 // setting up the search and show event listeners
 movieApp.setupEventListeners = () => {
     const searchButton = document.querySelector('.searchButton');
     const show = document.querySelector('.show');
     const yearList = document.querySelectorAll('.yearItem');
-    
+
+
+    // Adding event listeners to the sliders 
+    const sliders = document.querySelectorAll('.slider');
+    sliders.forEach((slider) => {
+        slider.addEventListener('change', function () {
+            const slideLabel = this.nextElementSibling;
+            const slideSpan = slideLabel.querySelector('.slideValue');
+            // console.log(slideLabel, slideValue);
+
+            if (slideLabel.classList.contains('slideRating')) {
+                movieApp.rating = this.value;
+                slideSpan.textContent = movieApp.rating;
+            } else if (slideLabel.classList.contains('slideRuntime')) {
+                movieApp.maxRuntime = this.value;
+                slideSpan.textContent = movieApp.maxRuntime;
+            }
+        });
+    });
+
     // Adding event listener to the search Button
     searchButton.addEventListener('click', () => {
         const selectedGenres = [...document.querySelectorAll('.genre.chosen')];
         // converting nodelist to array so that we can use map
         const genreValues = selectedGenres.map((genre) => {
             console.log(genre.value);
-            
+
             return genre.value;
         });
 
@@ -62,17 +89,22 @@ movieApp.setupEventListeners = () => {
         })
     });
 
-    
+
+
     // Adding event listener to the show Button
     show.addEventListener('click', function () {
-        const yearList = document.querySelector('.yearList');
+        const advancedSearch = document.querySelector('.advancedSearch');
+        const advancedArrow = document.querySelector('.show i');
         // transitions on percentage or auto values is not supported in js so we have to do it this way :sad-face:
 
-        if (yearList.style.maxHeight) {
-            yearList.style.maxHeight = null;
+        if (advancedSearch.style.maxHeight) {
+            advancedSearch.style.maxHeight = null;
         } else {
-            yearList.style.maxHeight = `${yearList.scrollHeight}px`;
+            advancedSearch.style.maxHeight = `${advancedSearch.scrollHeight}px`;
         }
+
+        advancedArrow.classList.toggle('fa-angle-double-up');
+        advancedArrow.classList.toggle('fa-angle-double-down');
     });
 
 
@@ -137,8 +169,9 @@ movieApp.getMovies = (genre, page) => {
         include_adult: false,
         page: page, //new
         'primary_release_date.gte': movieApp.rangeStart,
-        'primary_release_date.lte': movieApp.rangeEnd
-        // primary_release_date.gte=1990-01-01&primary_release_date.lte=1999-12-31
+        'primary_release_date.lte': movieApp.rangeEnd,
+        'vote_average.gte': movieApp.rating,
+        'with_runtime.lte': movieApp.maxRuntime
     });
 
     fetch(url)
@@ -152,7 +185,7 @@ movieApp.clearMovies = () => {
     movieApp.galleryList.innerHTML = '';
 };
 movieApp.displayMovies = (movies) => {
-    
+
     const movieGallery = document.querySelector('.movieGallery');
 
     // If no list items exist, unhide the movie gallery
@@ -162,10 +195,8 @@ movieApp.displayMovies = (movies) => {
 
     movies.forEach((movie) => {
         //new
-        const {title, poster_path: poster, overview, vote_average: rating } = movie;
-        // const poster = movie.poster_path;
-        // const overview = movie.overview;
-        // const rating = movie.vote_average;
+        const { title, poster_path: poster, overview, vote_average: rating, release_date} = movie;
+        const releaseYear = release_date.slice(0, 4);
 
         // if the poster is missing do not bother adding it to the gallery
         if (poster !== null) {
@@ -174,17 +205,20 @@ movieApp.displayMovies = (movies) => {
 
             listItem.classList.add('galleryItem');
             listItem.innerHTML = `
-                <div class="movie">
-                    <img src="${movieApp.imgURL}${poster}" alt="${title}">
-                    <div class="summary">
-                        <p class="overview">${overview}</p>
-                        <div class="ratingContainer">
-                            <p class="rating">${rating}</p>
+                <div class="movieCard">
+                    <div class="movie">
+                        <img class="moviePoster" src="${movieApp.imgURL}${poster}" alt="${title}">
+                        <div class="summary">
+                            <p class="overview">${overview}</p>
+                            <span class="ratingContainer">
+                                <p class="rating">${rating}</p>
+                            </span>
                         </div>
                     </div>
+                    
                 </div>
-                <div class="titleContainer">
-                    <p class="title">${title}</p>  
+                <div class="titleCard">
+                        <p class="title">${title} (${releaseYear})</p>
                 </div>
             `;
 

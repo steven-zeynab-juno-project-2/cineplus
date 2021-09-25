@@ -9,8 +9,8 @@
     <!-- font family --> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&family=Poppins:wght@400;700&display=swap" rel="stylesheet"> 
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/69d6599dec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 
@@ -18,7 +18,7 @@
     <div class="appContainer">
         <header>
             <div class="wrapper">
-                <h1>CinePlus</h1>
+                <h1>Cineplus</h1>
             </div>
         </header> <!-- end of header -->
         <main>
@@ -33,11 +33,13 @@
                             <!-- Add genres from API -->
                         </ul>
                     </div>
-                    <div class="searchBox">
-                        <div class="yearBox">
-                            <h3>Release Date</h3>
-                            <button class='show'>Show</button>
-                            <ul class="yearList">
+                    
+                    <div class="yearBox">
+                        <h3>Release Date</h3>
+                        
+                        <ul class="yearList">
+                            <li class="selectedYear"><button class="yearOpen">-</button></li>
+                            <ul class="yearOptions">
                                 <li><button class="yearItem" value=1949>Before 1950</button></li>
                                 <li><button class="yearItem" value=1950>1950s</button></li>
                                 <li><button class="yearItem" value=1960>1960s</button></li>
@@ -48,12 +50,28 @@
                                 <li><button class="yearItem" value=2010>2010s</button></li>
                                 <li><button class="yearItem" value=2020>2020s</button></li>
                             </ul>
-                        </div>
-                        <div class="searchButtonBox">
-                            <button class='searchButton'>Search</button>
+                        </ul>
+                    </div>
+
+                    <!-- <i class="fas fa-angle-double-up"></i> -->
+                    
+
+                    <h3 class="show">Advanced Settings
+                        <i class="fas fa-angle-double-down"></i>
+                    </h3>
+                    <div class="advancedSearch">
+                        <div class="slideContainer">
+                            <input type="range" min="0" max="10" step="1" value="6" class="slider" id="slideRating">
+                            <label class="slideRating" for="slideRating">Rating: <span class="slideValue">6</span></label>
+
+                            <input type="range" min="60" max="240" step="10" value="180" class="slider" id="slideRuntime">
+                            <label class="slideRuntime" for="slideRuntime">Max Runtime: <span class="slideValue">180</span></label>
                         </div>
                     </div>
-                </section>
+                    
+                    <button class='searchButton'>Search</button>
+                    
+                </section> <!-- end of movieMenu -->
     
                 <section class="movieGallery">
                     <ul class="galleryList">
