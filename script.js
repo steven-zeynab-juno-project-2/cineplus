@@ -1,5 +1,3 @@
-// &sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=1990-01-01&primary_release_date.lte=1999-12-31
-
 const movieApp = {};
 
 movieApp.apiURL = `https://api.themoviedb.org/3`;
@@ -8,9 +6,12 @@ movieApp.apiKey = `589df13bf2644ed869e616fad6d941ce`;
 
 movieApp.genreList = document.querySelector('.genreList');
 movieApp.galleryList = document.querySelector('.galleryList');
+movieApp.yearList = document.querySelector('.yearList');
+movieApp.yearOptions = document.querySelector('.yearOptions');
+movieApp.footer = document.querySelector('footer');
+movieApp.selectedYear = document.querySelector('.selectedYear');
 
-movieApp.pageNum = 1; // new
-
+movieApp.pageNum = 1; 
 movieApp.rating = 6;
 movieApp.maxRuntime = 180;
 
@@ -21,9 +22,14 @@ movieApp.init = () => {
     movieApp.getGenres();
     movieApp.setupEventListeners();
 
-    document.querySelector('.yearOpen').addEventListener('click', function () {
-        document.querySelector('.yearOptions').classList.toggle('open');
+    movieApp.selectedYear.addEventListener('click', function () {
+        movieApp.yearOptions.classList.toggle('open');
     });
+
+    movieApp.yearOptions.addEventListener('mouseleave', function () {
+        movieApp.yearOptions.classList.remove('open');
+    });
+
 };
 
 
@@ -31,8 +37,6 @@ movieApp.init = () => {
 movieApp.setupEventListeners = () => {
     const searchButton = document.querySelector('.searchButton');
     const show = document.querySelector('.show');
-    const yearList = document.querySelectorAll('.yearItem');
-
 
     // Adding event listeners to the sliders 
     const sliders = document.querySelectorAll('.slider');
@@ -52,29 +56,63 @@ movieApp.setupEventListeners = () => {
         });
     });
 
+
+    // Adding event listener to the gallery button to allow more movies to load.
+    const moreMovies = document.querySelector('.moreMovies');
+    moreMovies.addEventListener('click', ()=>{
+        const selectedGenres = [...document.querySelectorAll('.genre.chosen')];
+        // converting nodelist to array so that we can use map
+        const genreValues = selectedGenres.map((genre) => {
+            return genre.value;
+        });
+
+        const errorSearch = document.querySelector('.errorSearch');
+        if (selectedGenres.length !== 0) {
+            movieApp.pageNum += 1;
+            console.log(movieApp.pageNum);
+            movieApp.getMovies(genreValues);
+            errorSearch.classList.remove('unhidden');
+        } else {
+            errorSearch.classList.add('unhidden');
+        }
+    });
+    
+
     // Adding event listener to the search Button
     searchButton.addEventListener('click', () => {
         const selectedGenres = [...document.querySelectorAll('.genre.chosen')];
         // converting nodelist to array so that we can use map
         const genreValues = selectedGenres.map((genre) => {
-            console.log(genre.value);
-
             return genre.value;
         });
 
-        // new
-        movieApp.pageNum = 1;
-        movieApp.getMovies(genreValues, movieApp.pageNum);
-        // will add another listener for a show more where you can get subsequent pages of movies
+        const errorSearch = document.querySelector('.errorSearch');
+        if (selectedGenres.length !== 0) {
+            movieApp.pageNum = 1;
+            movieApp.getMovies(genreValues);
+            errorSearch.classList.remove('unhidden');
+        } else {
+            errorSearch.classList.add('unhidden');
+        }
     });
 
+    
     // Adding event listeners to the yearList dropdown
-    yearList.forEach((rangeValue) => {
-        rangeValue.addEventListener('click', function () {
+    const yearList = document.querySelectorAll('.yearItem');
+    yearList.forEach((yearItem) => {
+        yearItem.addEventListener('click', function () {
 
-            if (document.querySelectorAll('.yearList.chosen').length === 0 || (this.classList.contains('chosen') && this.classList.contains('yearList'))) {
-                movieApp.setChosen(this);
+            const chosenOne = document.querySelector('.yearItem.chosen');
+            const selectedYear = document.querySelector('.selectedYear');
+
+            if (chosenOne) {
+                chosenOne.classList.remove('chosen');       
             }
+            this.classList.add('chosen');
+            selectedYear.textContent = this.textContent;
+            selectedYear.classList.add('chosen');
+
+            movieApp.yearOptions.classList.remove('open');
 
             // On the bottom range we set 
             if (this.value !== 1949) {
@@ -84,10 +122,9 @@ movieApp.setupEventListeners = () => {
                 movieApp.rangeStart = `1900-01-01`;
                 movieApp.rangeEnd = `${parseInt(this.value)}-12-31`;
             }
-
-            console.log(movieApp.rangeStart, movieApp.rangeEnd);
         })
     });
+
 
 
 
@@ -106,9 +143,6 @@ movieApp.setupEventListeners = () => {
         advancedArrow.classList.toggle('fa-angle-double-up');
         advancedArrow.classList.toggle('fa-angle-double-down');
     });
-
-
-
 };
 
 // Getting the genres from the TMDB movie API
@@ -161,17 +195,18 @@ movieApp.setChosen = (element) => {
 }
 
 // Get the movies based on the user inputted query parameters, genre, release date, etc.
-movieApp.getMovies = (genre, page) => {
+movieApp.getMovies = (genre) => {
     const url = new URL(`${movieApp.apiURL}/discover/movie`);
     url.search = new URLSearchParams({
         api_key: movieApp.apiKey,
         with_genres: genre,
         include_adult: false,
-        page: page, //new
+        page: movieApp.pageNum, //new
         'primary_release_date.gte': movieApp.rangeStart,
         'primary_release_date.lte': movieApp.rangeEnd,
         'vote_average.gte': movieApp.rating,
-        'with_runtime.lte': movieApp.maxRuntime
+        'with_runtime.lte': movieApp.maxRuntime,
+        'vote_count.gte': 100
     });
 
     fetch(url)
@@ -184,35 +219,46 @@ movieApp.getMovies = (genre, page) => {
 movieApp.clearMovies = () => {
     movieApp.galleryList.innerHTML = '';
 };
+
+movieApp.ratingClass = (rating) => {
+    if (rating >= 5 && rating <= 8) {
+        return 'good';
+    } else if (rating >= 8 && rating <= 10) {
+        return 'great';
+    }
+};
+
 movieApp.displayMovies = (movies) => {
 
     const movieGallery = document.querySelector('.movieGallery');
 
-    // If no list items exist, unhide the movie gallery
-    movieApp.galleryList.querySelector('li') ? null : movieGallery.classList.toggle('unhidden');
+    if (movieApp.pageNum === 1) {
+        movieApp.clearMovies();
+    }
 
-    movieApp.clearMovies();
+    const errorGallery = document.querySelector('.errorGallery');
+    if (movies.length !== 0) {
+        movies.forEach((movie) => {
+            //new
+            const { title, poster_path: poster, overview, vote_average: rating, release_date } = movie;
+            const releaseYear = release_date.slice(0, 4);
 
-    movies.forEach((movie) => {
-        //new
-        const { title, poster_path: poster, overview, vote_average: rating, release_date} = movie;
-        const releaseYear = release_date.slice(0, 4);
+            // if the poster is missing do not bother adding it to the gallery
+            if (poster !== null) {
+                
+                const listItem = document.createElement('li');
 
-        // if the poster is missing do not bother adding it to the gallery
-        if (poster !== null) {
+                listItem.classList.add('galleryItem');
+                listItem.innerHTML = `
 
-            const listItem = document.createElement('li');
-
-            listItem.classList.add('galleryItem');
-            listItem.innerHTML = `
                 <div class="movieCard">
                     <div class="movie">
                         <img class="moviePoster" src="${movieApp.imgURL}${poster}" alt="${title}">
                         <div class="summary">
                             <p class="overview">${overview}</p>
-                            <span class="ratingContainer">
-                                <p class="rating">${rating}</p>
-                            </span>
+                            <div class="ratingContainer">
+                                <p class="rating ${movieApp.ratingClass(rating)}">${rating.toFixed(1)}</p>
+                            </div>
                         </div>
                     </div>
                     
@@ -221,11 +267,21 @@ movieApp.displayMovies = (movies) => {
                         <p class="title">${title} (${releaseYear})</p>
                 </div>
             `;
+                movieApp.galleryList.append(listItem);
+            }
+        });
 
-            movieApp.galleryList.append(listItem);
-
-        }
-    });
+        
+        movieApp.galleryList.classList.add('unhidden');
+        document.querySelector('.galleryButtonContainer').classList.add('unhidden');
+        errorGallery.classList.remove('unhidden');
+        movieApp.footer.classList.add('relativePosition');
+    } else {
+        movieApp.galleryList.classList.remove('unhidden');
+        document.querySelector('.galleryButtonContainer').classList.remove('unhidden');
+        errorGallery.classList.add('unhidden');
+        movieApp.footer.classList.remove('relativePosition');
+    }
 }
 
 movieApp.init();

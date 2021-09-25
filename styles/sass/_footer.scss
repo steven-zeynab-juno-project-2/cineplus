@@ -1,15 +1,30 @@
 /* ===========================================
 FOOTER
 =========================================== */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    .footerContainer {
+        background-color: $secondary-color;
+        display: flex;
+        flex-direction: column;
+        padding: 1%;
+        p, a {
+            text-align: center;
+            color: $primary-color;
+            // color: $secondary-color;
+            letter-spacing: 1px;
+        }
 
-.footerContainer {
-    display: flex;
-    flex-direction: column;
-    background-color: $secondary-color;
-    padding: 1%;
-    p, a {
-        text-align: center;
-        color: $primary-color;
-        letter-spacing: 1px;
+    }
+    &.relativePosition {
+        position: relative;
     }
 }
+
+
+// padding: 20px 0;
+// max-width: 1500px;
+// width: 95%;
+// margin: 0 auto;

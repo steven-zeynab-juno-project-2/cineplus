@@ -1,3 +1,5 @@
+
+
 /* Portrait tablet and small desktops */
 @media (max-width: 850px) {
     .movieGallery .galleryList {
@@ -25,5 +27,9 @@
     }
     .movieMenu h3 {
         font-size: 1.1rem;
+    }
+
+    .galleryButtonContainer.unhidden {
+        flex-direction: column;
     }
 }

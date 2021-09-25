@@ -8,3 +8,30 @@ $box-shadow-color: rgba(231, 125, 47, 78%);
 
 // maybe
 $search-background-color: rgb(255, 0, 0);
+
+@mixin clickableStyle {
+    cursor: pointer;
+    border: none;
+    outline: 1px solid rgba(0 ,0, 0, 0.3);
+    border-radius: 10px;
+    padding: 10px;
+    background-color: $box-color;
+    box-shadow: inset 0px 0px 5px 2px $box-shadow-color;
+}
+
+@mixin chosenStyle {
+    background-color: #f07a75;
+    box-shadow: inset 0px 0px 5px 2px #ef5858;
+    color: whitesmoke;
+}
+
+@mixin sliderStyle {
+    border: 1px solid #000;
+    height: 30px;
+    width: 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    background: rgba($secondary-color, 0.7);
+    box-shadow: 1px 1px 1px #000;
+}
+
