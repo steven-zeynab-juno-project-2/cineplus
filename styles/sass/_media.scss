@@ -1,0 +1,59 @@
+
+/* Portrait tablet and small desktops */
+@media (max-width: 850px) {
+    .movieGallery .galleryList {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Landscape phones and down */
+@media (max-width: 550px) {
+    body {
+        font-size: 0.9rem;
+    }
+    .movieGallery .galleryList {
+        grid-template-columns: 1fr;
+    }
+    header .wrapper {
+        
+        h1 {
+            font-size: 3rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+    }
+    .movieMenu h3 {
+        font-size: 1.1rem;
+    }
+}
+/* Portrait tablet and small desktops */
+@media (max-width: 850px) {
+    .movieGallery .galleryList {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Landscape phones and down */
+@media (max-width: 550px) {
+    body {
+        font-size: 0.9rem;
+    }
+    .movieGallery .galleryList {
+        grid-template-columns: 1fr;
+    }
+    header .wrapper {
+        
+        h1 {
+            font-size: 3rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+    }
+    .movieMenu h3 {
+        font-size: 1.1rem;
+    }
+}
