@@ -282,7 +282,6 @@ p {
 button {
   cursor: pointer;
   border: none;
-  outline: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   padding: 10px;
   background-color: #f0c7b7;
@@ -415,7 +414,6 @@ MENU
   width: 100%;
   cursor: pointer;
   border: none;
-  outline: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   padding: 10px;
   background-color: #f0c7b7;
@@ -624,7 +622,6 @@ GALLERY
 .galleryButtonContainer a {
   cursor: pointer;
   border: none;
-  outline: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   padding: 10px;
   background-color: #f0c7b7;

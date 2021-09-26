@@ -12,7 +12,8 @@ $search-background-color: rgb(255, 0, 0);
 @mixin clickableStyle {
     cursor: pointer;
     border: none;
-    outline: 1px solid rgba(0 ,0, 0, 0.3);
+    // outline: 1px solid rgba(0 ,0, 0, 0.3); 
+    // this looks fine on desktop but not on some mobile devices so we can remove this
     border-radius: 10px;
     padding: 10px;
     background-color: $box-color;
