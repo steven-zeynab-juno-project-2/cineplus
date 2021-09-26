@@ -4,26 +4,23 @@ GENERAL STYLINGS
 
 html {
     font-size: 125%;
-}
-
-body {
-    font-family: $secondary-font;
-    margin: 0;
-    padding: 0;
-    background-color: $primary-color;
+    scroll-behavior: smooth;
 }
 
 html, body {
     height: 100%;
-    width: 100%;
 }
 
-.appContainer {
-    min-height: 100%;
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: $secondary-font;
+    background-color: $primary-color;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: 100%;;
 }
+
 
 h1, h3 {
     font-family: 'Poppins', sans-serif;
@@ -62,17 +59,23 @@ p {
 }
 
 button {
-    cursor: pointer;
-    border: none;
-    outline: 1px solid rgba(0 ,0, 0, 0.3);
-    border-radius: 10px;
-    padding: 10px;
-    background-color: $box-color;
-    box-shadow: inset 0px 0px 5px 2px $box-shadow-color;
+    @include clickableStyle;
 }
 
 .chosen {
     background-color: #f07a75;
     box-shadow: inset 0px 0px 5px 2px #ef5858;
     color: whitesmoke;
+}
+
+
+.error {
+    text-align: center;
+    margin: 2%;
+    color: red;
+    display: none;
+}
+
+.unhidden {
+    display: block;
 }

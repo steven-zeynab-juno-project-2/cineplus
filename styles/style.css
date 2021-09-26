@@ -313,6 +313,10 @@ header .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -325,7 +329,16 @@ header .wrapper h1 {
   text-transform: uppercase;
   font-size: 5rem;
   font-weight: 400;
-  margin: 5%;
+  margin: 5% 0 0;
+}
+header .wrapper h2 {
+  font-family: "Shadows Into Light", cursive;
+  font-weight: 400;
+  font-size: 2rem;
+  font-style: italic;
+  color: #ff0052;
+  text-align: center;
+  letter-spacing: 1px;
 }
 
 /* ===========================================
@@ -513,7 +526,7 @@ GALLERY
   max-height: 100%;
 }
 .movieGallery .galleryList {
-  margin: 3% 0 10%;
+  margin: 3% 0 15%;
   max-height: auto;
   max-width: auto;
   display: grid;
@@ -545,10 +558,6 @@ GALLERY
   grid-template-rows: 1fr auto;
 }
 
-.unhidden {
-  opacity: 1;
-}
-
 /* ===========================================
 FOOTER
 =========================================== */
@@ -567,4 +576,33 @@ FOOTER
   text-align: center;
   color: #f7d6d6;
   letter-spacing: 1px;
+}
+
+/* Portrait tablet and small desktops */
+@media (max-width: 850px) {
+  .movieGallery .galleryList {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+/* Landscape phones and down */
+@media (max-width: 550px) {
+  body {
+    font-size: 0.9rem;
+  }
+
+  .movieGallery .galleryList {
+    grid-template-columns: 1fr;
+  }
+
+  header .wrapper h1 {
+    font-size: 3rem;
+  }
+  header .wrapper h2 {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+  }
+
+  .movieMenu h3 {
+    font-size: 1.1rem;
+  }
 }

@@ -42,15 +42,18 @@ MENU
 .yearList {
     position: relative;
     border-radius: 10px;
-    // overflow: hidden;
     transition: max-height 0.3s ease-out;
     margin: 5% 0;
-    button {
-        // background-color: $box-color;
+    
+    .selectedYear,
+    .yearItem {
         width: 100%;
+        @include clickableStyle;
+        &.chosen {
+            @include chosenStyle;
+        }
     }
     .yearOptions {
-        // (235, 158, 108, 0.27)
         visibility: hidden;
         position: absolute;
         top: 100%;
@@ -59,15 +62,12 @@ MENU
         z-index: 10;
         opacity: 0;
         transition: all 0.5s;
+        pointer-events: none;
         &.open  {
             opacity: 1;
             visibility: visible;
+            pointer-events: all;
         }
-        // .chosen {
-        //     background-color: #f07a75;
-        //     box-shadow: inset 0px 0px 5px 2px #ef5858;
-        //     color: whitesmoke;
-        // }
     }
 }
 
@@ -83,6 +83,11 @@ MENU
 .slideContainer {
     width: 50%;
     margin: 3% auto;
+    display: flex;
+    flex-direction: column;
+    label {
+        text-align: center;
+    }
     .slider {
         border: 1px solid $secondary-color;
         background: $primary-color;
@@ -93,26 +98,14 @@ MENU
 
         // For Firefox
         &::-moz-range-thumb {
-            border: 1px solid #000;
-            height: 30px;
-            width: 15px;
-            cursor: pointer;
-            border-radius: 3px;
-            background: rgba($secondary-color, 0.7);
-            box-shadow: 1px 1px 1px #000;
+            @include sliderStyle;
         }
 
         // For webkit
         &::-webkit-slider-thumb {
             -webkit-appearance: none;
             margin: -5px 0;
-            border: 1px solid #000;
-            height: 30px;
-            width: 15px;
-            cursor: pointer;
-            border-radius: 3px;
-            background: rgba($secondary-color, 0.7);
-            box-shadow: 1px 1px 1px #000;
+            @include sliderStyle;
         }
     }
 }
