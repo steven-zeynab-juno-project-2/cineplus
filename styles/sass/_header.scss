@@ -13,9 +13,10 @@ header .wrapper {
         font-size: 5rem;
         font-weight: 400;
         margin: 5% 0 0;
+        text-shadow: 2px 2px 2px #000;
     }
     h2 {
-        font-family: 'Shadows Into Light', cursive;
+        font-family: $tertiary-font;
         font-weight: 400;
         font-size: 2rem;
         font-style: italic;

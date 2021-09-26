@@ -234,10 +234,6 @@ html {
   scroll-behavior: smooth;
 }
 
-html, body {
-  height: 100%;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -249,6 +245,7 @@ body {
 
 h1, h3 {
   font-family: "Poppins", sans-serif;
+  color: #c1082bd9;
   margin: 0;
   padding: 0;
 }
@@ -262,7 +259,6 @@ h1, h3 {
 img {
   display: block;
   max-width: 100%;
-  max-height: 100%;
 }
 
 ul {
@@ -312,6 +308,10 @@ button {
   display: block;
 }
 
+.hidden {
+  display: none;
+}
+
 /* ===========================================
 HEADER
 =========================================== */
@@ -336,6 +336,7 @@ header .wrapper h1 {
   font-size: 5rem;
   font-weight: 400;
   margin: 5% 0 0;
+  text-shadow: 2px 2px 2px #000;
 }
 header .wrapper h2 {
   font-family: "Shadows Into Light", cursive;
@@ -362,7 +363,13 @@ MENU
       -ms-flex-align: center;
           align-items: center;
 }
-.movieMenu .genreBox {
+.movieMenu h3 {
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 1.5rem;
+}
+
+.genreContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -374,13 +381,7 @@ MENU
       -ms-flex-align: center;
           align-items: center;
 }
-.movieMenu h3 {
-  color: #c1082bd9;
-  letter-spacing: 2px;
-  font-size: 1.5rem;
-}
-
-.genreList {
+.genreContainer .genreList {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -391,16 +392,11 @@ MENU
           justify-content: center;
   margin: 20px 0;
 }
-.genreList li {
+.genreContainer .genreList li {
   margin: 5px;
 }
 
-.searchButton {
-  width: 50%;
-  max-width: 360px;
-}
-
-.yearBox {
+.yearContainer {
   width: 50%;
   max-width: 360px;
   margin: 3%;
@@ -451,7 +447,10 @@ MENU
   pointer-events: all;
 }
 
-.advancedSearch {
+.advancedSettingsContainer {
+  width: 100%;
+}
+.advancedSettingsContainer .advancedSettings {
   margin: 3% 0;
   width: 100%;
   background: rgba(255, 0, 0, 0.2);
@@ -507,53 +506,23 @@ MENU
           box-shadow: 1px 1px 1px #000;
 }
 
-/* ===========================================
-GALLERY
-============================================ */
-.summary {
+.searchButtonContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  position: absolute;
-  top: 0;
-  height: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   width: 100%;
-  -webkit-transition: opacity 0.5s ease-out;
-  transition: opacity 0.5s ease-out;
-  opacity: 0;
-  padding: 10%;
-  background-color: rgba(0, 0, 0, 0.7);
-  overflow: scroll;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
 }
-.summary::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-.summary:hover {
-  opacity: 1;
-}
-.summary p {
-  color: whitesmoke;
-}
-.summary .ratingContainer .rating {
-  display: inline-block;
-  border: 2px red solid;
-  border-radius: 50%;
-  padding: 4px;
-}
-.summary .ratingContainer .rating.good {
-  border-color: yellow;
-}
-.summary .ratingContainer .rating.great {
-  border-color: green;
+.searchButtonContainer .searchButton {
+  width: 50%;
+  max-width: 360px;
 }
 
+/* ===========================================
+GALLERY
+============================================ */
 .movieGallery {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -576,18 +545,23 @@ GALLERY
   gap: 100px 2%;
   margin: 3% 0 15%;
 }
-.galleryList .galleryItem .movieCard {
+.galleryList .title {
+  text-align: center;
+  padding: 5%;
+}
+
+.movieCard {
   display: grid;
   grid-template-rows: 1fr auto;
   height: 100%;
 }
-.galleryList .galleryItem .movieCard .movie {
+.movieCard .movie {
   position: relative;
 }
-.galleryList .galleryItem .movieCard .movie:hover {
+.movieCard .movie:hover {
   cursor: pointer;
 }
-.galleryList .galleryItem .moviePoster {
+.movieCard .movie .moviePoster {
   -webkit-box-shadow: 0px 0px 3px 3px #000;
           box-shadow: 0px 0px 3px 3px #000;
   max-width: 100%;
@@ -596,14 +570,55 @@ GALLERY
   -o-object-fit: cover;
      object-fit: cover;
 }
-.galleryList .galleryItem .title {
-  text-align: center;
-  padding: 5%;
+
+.summary {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  padding: 10%;
+  opacity: 0;
+  -webkit-transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-out;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.summary::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+.summary:hover {
+  opacity: 1;
+}
+.summary p {
+  color: whitesmoke;
+}
+
+.ratingContainer .rating {
+  display: inline-block;
+  border: 2px red solid;
+  border-radius: 50%;
+  padding: 4px;
+}
+.ratingContainer .rating.good {
+  border-color: yellow;
+}
+.ratingContainer .rating.great {
+  border-color: green;
 }
 
 .galleryButtonContainer {
-  margin: 5% auto;
   display: none;
+  margin: 5% auto;
   color: #c1082bd9;
 }
 .galleryButtonContainer a {
@@ -618,7 +633,7 @@ GALLERY
   margin: 5px;
   color: #000;
 }
-.galleryButtonContainer i {
+.galleryButtonContainer a i {
   margin-left: 5px;
 }
 .galleryButtonContainer.unhidden {
@@ -650,6 +665,9 @@ footer .footerContainer p, footer .footerContainer a {
   text-align: center;
   color: #f7d6d6;
   letter-spacing: 1px;
+}
+footer.relativePosition {
+  position: relative;
 }
 footer.relativePosition {
   position: relative;

@@ -1,47 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What Movie to Watch</title>
-    <!-- font family -->
+    <!-- Font families -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&Montserrat:wght@100;400&family=Poppins:wght@400;700&display=swap"
         rel="stylesheet">
     <script src="https://kit.fontawesome.com/69d6599dec.js" crossorigin="anonymous"></script>
+    <!--Css link-->
     <link rel="stylesheet" href="./styles/style.css">
-</head>
+</head> 
 
 <body>
-
     <header id="header">
         <div class="wrapper">
             <h1>Cineplus</h1>
             <h2>What are you watching tonight?</h2>
         </div>
     </header> <!-- end of header -->
+    
     <main>
         <div class="wrapper">
 
+            <!-- Where the user can input any search parameters -->
             <section id="movieMenu" class="movieMenu">
 
-                <div class="genreBox">
-                    <h3>Select Genre</h3>
+                <!-- Where the user can select up to 3 genres -->
+                <div class="genreContainer">
+                    <h3>Select up to 3 Genres</h3>
 
                     <ul class="genreList">
                         <!-- Add genres from API -->
                     </ul>
                 </div>
 
-                <div class="yearBox">
+                <!-- Dropdown for user to select release years -->
+                <div class="yearContainer">
                     <h3>Release Date</h3>
 
                     <ul class="yearList">
-                        <li class="selectedYear yearOpen">Release Date</li>
+                        <li class="selectedYear">Release Date</li>
                         <ul class="yearOptions">
                             <li class="yearItem" value=1949>Before 1950</li>
                             <li class="yearItem" value=1950>1950s</li>
@@ -56,33 +59,44 @@
                     </ul>
                 </div>
 
-                <p class="errorSearch error">Please select at least one genre and a release date</p>
+                <!-- Error that will show if the required fields have not been chosen  -->
+                <div class="errorContainer">
+                    <p class="errorSearch error">Please select at least one genre and a release date</p>
+                </div>
 
-                <h3 class="show">Advanced Settings
-                    <i class="fas fa-angle-double-down"></i>
-                </h3>
-                <div class="advancedSearch">
-                    <div class="slideContainer">
-                        <input type="range" min="0" max="10" step="1" value="6" class="slider" id="slideRating">
-                        <label class="slideRating" for="slideRating">Rating: <span class="slideValue">6</span>+</label>
-
-                        <input type="range" min="60" max="240" step="10" value="180" class="slider" id="slideRuntime">
-                        <label class="slideRuntime" for="slideRuntime">Max Runtime: <span                         class="slideValue">180</span></label>
+                <!-- Advanced settings menu for rating and runtime settings  -->
+                <div class="advancedSettingsContainer">
+                    <h3 class="show">Advanced Settings<i class="fas fa-angle-double-down"></i></h3>
+                    <div class="advancedSettings">
+                        
+                        <div class="slideContainer">
+                            <input type="range" min="0" max="10" step="1" value="5" class="slider" id="slideRating">
+                            <label class="slideRating" for="slideRating">Rating: <span class="slideValue">5</span>+</label>
+    
+                            <input type="range" min="60" max="240" step="10" value="180" class="slider" id="slideRuntime">
+                            <label class="slideRuntime" for="slideRuntime">Max Runtime: <span class="slideValue">180</span></label>
+                        </div>
                     </div>
                 </div>
 
-                <button class='searchButton'>Search</button>
+                <!-- For user to initiate search -->
+                <div class="searchButtonContainer">
+                    <button class='searchButton'>Search</button>
+                </div>
 
             </section> <!-- end of movieMenu -->
 
+            <!-- Where to display the movies according to the user parameters -->
             <section class="movieGallery">
-
+            
+                <!-- Error that will show if no movies match the user parameters -->
                 <p class="errorGallery error">Sorry we could not find any movies. Try broadening your search</p>
 
                 <ul class="galleryList">
                     <!-- Adding from fetch API -->
                 </ul>
 
+                <!-- Buttons for returning to top of window or displaying more movies -->
                 <div class="galleryButtonContainer">
                     <a class="scrollToTop" href="#header">Back to Top<i class="fas fa-angle-double-up"></i></a>
                     <a class="moreMovies">More Movies</a>

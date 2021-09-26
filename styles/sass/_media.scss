@@ -1,5 +1,4 @@
 
-
 /* Portrait tablet and small desktops */
 @media (max-width: 850px) {
     .movieGallery .galleryList {
@@ -15,8 +14,8 @@
     .movieGallery .galleryList {
         grid-template-columns: 1fr;
     }
+
     header .wrapper {
-        
         h1 {
             font-size: 3rem;
         }

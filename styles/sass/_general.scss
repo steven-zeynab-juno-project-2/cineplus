@@ -7,11 +7,6 @@ html {
     scroll-behavior: smooth;
 }
 
-html, body {
-    height: 100%;
-}
-
-
 body {
     margin: 0;
     padding: 0;
@@ -21,9 +16,9 @@ body {
     grid-template-rows: auto 1fr auto;
 }
 
-
 h1, h3 {
-    font-family: 'Poppins', sans-serif;
+    font-family: $secondary-font;
+    color: $secondary-color;
     margin: 0;
     padding: 0;
 }
@@ -37,7 +32,6 @@ h1, h3 {
 img {
     display: block;
     max-width: 100%;
-    max-height: 100%;
 }
 
 ul {
@@ -63,11 +57,8 @@ button {
 }
 
 .chosen {
-    background-color: #f07a75;
-    box-shadow: inset 0px 0px 5px 2px #ef5858;
-    color: whitesmoke;
+    @include chosenStyle;
 }
-
 
 .error {
     text-align: center;
@@ -78,4 +69,8 @@ button {
 
 .unhidden {
     display: block;
+}
+
+.hidden {
+    display: none;
 }

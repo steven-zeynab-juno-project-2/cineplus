@@ -1,14 +1,14 @@
+// Font and colour styling
 $base-font: 'Montserrat', sans-serif;
 $secondary-font: 'Poppins', sans-serif;
+$tertiary-font: 'Shadows Into Light', cursive;
 $primary-color: rgba(247, 214, 214, 1);
 $secondary-color:#c1082bd9;
-// $box-color: rgba(235, 158, 108, 27%);
 $box-color: #f0c7b7;
 $box-shadow-color: rgba(231, 125, 47, 78%);
-
-// maybe
 $search-background-color: rgb(255, 0, 0);
 
+// Mixins for repeated use
 @mixin clickableStyle {
     cursor: pointer;
     border: none;
