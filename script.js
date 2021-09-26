@@ -230,7 +230,13 @@ movieApp.ratingClass = (rating) => {
 
 movieApp.displayMovies = (movies) => {
 
-    const movieGallery = document.querySelector('.movieGallery');
+movieApp.ratingClass = (rating) => {
+    if (rating >= 5 && rating <= 8) {
+        return 'good';
+    } else if (rating >= 8 && rating <= 10) {
+        return 'great';
+    }
+};
 
     if (movieApp.pageNum === 1) {
         movieApp.clearMovies();
@@ -250,6 +256,7 @@ movieApp.displayMovies = (movies) => {
 
                 listItem.classList.add('galleryItem');
                 listItem.innerHTML = `
+
                 <div class="movieCard">
                     <div class="movie">
                         <img class="moviePoster" src="${movieApp.imgURL}${poster}" alt="${title}">
@@ -285,15 +292,3 @@ movieApp.displayMovies = (movies) => {
 
 movieApp.init();
 
-    © 2021 GitHub, Inc.
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
-
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
